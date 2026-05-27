@@ -52,7 +52,7 @@ jobs:
       - name: Build Backend (amd64)
         run: |
           go mod download
-          go build -ldflags "-s -w -X 'new-api/common.Version=$VERSION' -extldflags '-static'" -o new-api-$VERSION
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X 'new-api/common.Version=$VERSION'" -o new-api-$VERSION
       - name: Build Backend (arm64)
         run: |
           sudo apt-get update
